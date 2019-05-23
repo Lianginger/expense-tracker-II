@@ -1,18 +1,13 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 
-mongoose.set('debug', true)
-mongoose.connect('mongodb://localhost/expense-tracker-ii', { useNewUrlParser: true })
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', function () {
-  console.log('MongoDB is connected!!!')
-})
+app.engine('handlebars', exphbs())
+app.set('view engine', 'handlebars')
 
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.render('home')
 })
 
 app.listen(port, () => {
