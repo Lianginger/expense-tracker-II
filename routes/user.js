@@ -44,15 +44,16 @@ router.post('/register', (req, res) => {
         errors.push({ message: '這個 Email 已經註冊過了' })
         res.render('register', { errors, name, email, password, password2 })
       } else {
-
+        const salt = bcrypt.genSaltSync(10)
+        const hash = bcrypt.hashSync(password, salt)
+        User.create({
+          name: req.body.name,
+          email: req.body.email,
+          password: hash
+        }).then(res.redirect('/'))
       }
     })
   }
-  // User.create({
-  //   name: req.body.name,
-  //   email: req.body.email,
-  //   password: req.body.password
-  // }).then(res.redirect('/'))
 })
 
 // 登出
