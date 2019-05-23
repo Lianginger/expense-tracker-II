@@ -5,6 +5,16 @@
         <h1 class="text-center mb-3">
           註冊
         </h1>
+        {{#if errors}}
+          {{#each errors}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{{this.message}}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+          {{/each}}
+        {{/if}}
         <form action="/users/register" method="POST">
           <div class="form-group">
             <label for="name">姓名</label>
