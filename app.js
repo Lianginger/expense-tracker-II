@@ -6,9 +6,8 @@ const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs())
 app.set('view engine', 'handlebars')
 
-app.get('/', (req, res) => {
-  res.render('home')
-})
+app.use('/', require('./routes/home'))
+app.use('/records', require('./routes/record'))
 
 app.listen(port, () => {
   console.log(`Express is running on ${port}`)
