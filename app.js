@@ -4,6 +4,7 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const db = require('./models')
 
 app.engine('handlebars', exphbs())
 app.set('view engine', 'handlebars')

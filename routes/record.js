@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../models')
+const Record = db.Record
 
 // 建立新資料頁面
 router.get('/new', (req, res) => {
