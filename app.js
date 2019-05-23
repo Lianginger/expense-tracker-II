@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // 設定 method-override
 app.use(methodOverride('_method'))
 
+app.use('/users', require('./routes/user'))
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
 

@@ -20,7 +20,11 @@ router.get('/register', (req, res) => {
 
 // 註冊檢查
 router.post('/register', (req, res) => {
-
+  User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  }).then(res.redirect('/'))
 })
 
 // 登出
