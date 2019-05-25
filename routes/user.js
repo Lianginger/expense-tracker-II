@@ -3,15 +3,19 @@ const router = express.Router()
 const db = require('../models')
 const User = db.User
 const bcrypt = require('bcryptjs')
+const passport = require('passport')
 
 // 登入頁面
 router.get('/login', (req, res) => {
-
+  res.render('login')
 })
 
 // 登入檢查
-router.post('/login',
-
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login',
+  // failureFlash: true
+})
 )
 
 // 註冊頁面
