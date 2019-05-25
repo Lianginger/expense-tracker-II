@@ -11,6 +11,11 @@ const helpers = require('handlebars-helpers')
 const math = helpers.comparison()
 const db = require('./models')
 
+// 判別開發環境
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config() // 使用 dotenv 讀取 .env 檔案
+}
+
 app.engine('handlebars', exphbs())
 app.set('view engine', 'handlebars')
 
@@ -43,6 +48,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/users', require('./routes/user'))
+app.use('/auth', require('./routes/auth'))
 app.use('/', authenticated, require('./routes/home'))
 app.use('/records', authenticated, require('./routes/record'))
 
