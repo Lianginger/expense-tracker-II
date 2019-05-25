@@ -44,7 +44,10 @@ router.put('/:id/edit', (req, res) => {
 
 // 刪除特定資料
 router.delete('/:id/', (req, res) => {
-  res.send('刪除特定資料')
+  Record.destroy({ where: { id: req.params.id, userId: req.user.id } })
+    .then(
+      res.redirect('/')
+    )
 })
 
 module.exports = router
