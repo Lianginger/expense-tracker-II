@@ -31,8 +31,8 @@ module.exports = (() => {
     done(null, user.id)
   })
   passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-      done(err, user)
+    User.findByPk(id).then(user => {
+      done(null, user)
     })
   })
 })()
