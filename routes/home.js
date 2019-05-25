@@ -11,7 +11,7 @@ const Op = Sequelize.Op
 
 router.get('/', (req, res) => {
   const filterMonth = req.query.filterMonth || ''
-  const filterMonthQuery = '%2019-' + filterMonth
+  const filterMonthQuery = '2019-' + filterMonth + '%'
   const filterCategory = req.query.filterCategory || ''
   const filterCategoryQuery = '%' + filterCategory
   const categoryChineseName = category[filterCategory]

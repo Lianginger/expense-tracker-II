@@ -17,8 +17,8 @@ module.exports = {
       category: {
         type: Sequelize.STRING
       },
-      price: {
-        type: Sequelize.INTEGER
+      amount: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

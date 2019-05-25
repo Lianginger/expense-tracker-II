@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     date: DataTypes.STRING,
     category: DataTypes.STRING,
-    price: DataTypes.INTEGER
+    amount: DataTypes.STRING
   }, {});
   Record.associate = function (models) {
     // associations can be defined here
