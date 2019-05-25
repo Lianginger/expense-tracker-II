@@ -7,6 +7,8 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 const authenticated = require('./config/auth')
+const helpers = require('handlebars-helpers')
+const math = helpers.comparison()
 const db = require('./models')
 
 app.engine('handlebars', exphbs())
@@ -16,6 +18,9 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 // 設定 method-override
 app.use(methodOverride('_method'))
+
+// 提供靜態檔案
+app.use(express.static('public'))
 
 // 使用 express session
 app.use(session({

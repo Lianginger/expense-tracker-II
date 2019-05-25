@@ -15,10 +15,7 @@ router.get('/new', (req, res) => {
 // 建立新資料
 router.post('/new', (req, res) => {
   const newRecord = req.body
-  console.log(req.user)
-  console.log(req.user.id)
   newRecord.UserId = req.user.id
-  console.log(newRecord)
   Record.create(newRecord)
     .then(
       res.redirect('/')
@@ -27,12 +24,22 @@ router.post('/new', (req, res) => {
 
 // 編輯特定資料頁面
 router.get('/:id/edit', (req, res) => {
-  res.send('編輯特定資料頁面')
+  Record.findOne({ where: { id: req.params.id, userId: req.user.id } })
+    .then(record => {
+      res.render('edit', { record })
+    })
 })
 
 // 編輯特定資料
 router.put('/:id/edit', (req, res) => {
-  res.send('編輯特定資料')
+  Record.findOne({ where: { id: req.params.id, userId: req.user.id } })
+    .then(record => {
+      Object.assign(record, req.body)
+      record.save()
+    })
+    .then(
+      res.redirect('/')
+    )
 })
 
 // 刪除特定資料
