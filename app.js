@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash')
 const authenticated = require('./config/auth')
 const helpers = require('handlebars-helpers')
 const math = helpers.comparison()
@@ -40,10 +41,15 @@ app.use(passport.session())
 // 載入 Passport config
 require('./config/passport')
 
+// 使用 connect-flash
+app.use(flash())
+
 // 登入後可以取得使用者的資訊方便我們在 view 裡面直接使用
 app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 

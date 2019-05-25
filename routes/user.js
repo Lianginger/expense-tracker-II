@@ -7,14 +7,19 @@ const passport = require('passport')
 
 // 登入頁面
 router.get('/login', (req, res) => {
-  res.render('login')
+  let errors = []
+  let errMessageArray = req.flash('error')
+  if (errMessageArray.length > 0) {
+    errors.push({ message: errMessageArray[0] })
+  }
+  res.render('login', { errors })
 })
 
 // 登入檢查
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/users/login',
-  // failureFlash: true
+  failureFlash: true
 })
 )
 
@@ -63,7 +68,8 @@ router.post('/register', (req, res) => {
 // 登出
 router.get('/logout', (req, res) => {
   req.logout()
-  res.redirect('users/login')
+  req.flash('success_msg', '你已經成功登出')
+  res.redirect('/users/login')
 })
 
 module.exports = router
